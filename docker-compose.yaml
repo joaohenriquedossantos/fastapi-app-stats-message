@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+          - "POSTGRES_PASSWORD=postgres"
+          - "POSTGRES_USER=postgres"
+          - "POSTGRES_DB=statsmessage"
+        ports: 
+            - "5433:5432"
+        volumes:
+         - ./pg-data/01_create_table_customers.sql:/docker-entrypoint-initdb.d/01_create_table_customers.sql
+         - ./pg-data/02_create_table_type.sql:/docker-entrypoint-initdb.d/02_create_table_type.sql
+         - ./pg-data/03_create_table_message.sql:/docker-entrypoint-initdb.d/03_create_table_message.sql
